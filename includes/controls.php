@@ -37,14 +37,35 @@
                 echo "                </div>\n";
             } else if ($mypoint[1] == 4) {
                 echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
-				echo "                <textarea name='textfeld' id='textfeld' rows='1' cols='40'></textarea>\n";
+				echo "                <input name='textfeld' id='textfeld'>\n<input name='respondfeld' id='respondfeld'>\n";
 				echo "                </div>\n";
                 echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
                 echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"right\">\n";
                 echo "                        <button class=\"ui-btn ui-icon-power ui-btn-icon-notext\" name=\"room".$room."point".$point."button\" id=\"room".$room."point".$point."button\">Button</button>\n";
                 echo "                    </div>\n";
                 echo "                </div>\n";
-			} else {
+			}
+			else if ($mypoint[1] == 5) {
+                echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
+                echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"center\">\n";
+                echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*1101*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"minus\" data-iconpos=\"notext\" align=\"right\">Vol down</a>\n";
+				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*3*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"power\" data-iconpos=\"notext\" align=\"right\">On / Off</a>\n";
+				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*1001*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"plus\" data-iconpos=\"notext\" align=\"right\">Vol up</a>\n";
+				echo "                    </div>\n";
+                echo "                </div>\n";
+                echo "                <div class=\"ui-block-c\" style=\"width:25%\"></div>\n";
+			} 
+			else if ($mypoint[1] == 6) {
+                echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
+                echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"center\">\n";
+                echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6101*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-l\" data-iconpos=\"notext\" align=\"right\">Vol down</a>\n";
+				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*3*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"power\" data-iconpos=\"notext\" align=\"right\">On / Off</a>\n";
+				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6001*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-r\" data-iconpos=\"notext\" align=\"right\">Vol up</a>\n";
+				echo "                    </div>\n";
+                echo "                </div>\n";
+                echo "                <div class=\"ui-block-c\" style=\"width:25%\"></div>\n";
+			} 
+			else {
                 if ($mypoint[1] == 1) {
                     echo "                <div class=\"ui-block-b\" style=\"width:50%\" id=\"div-room".$room."point".$point."slider\">\n";
                     echo "                    <input name=\"room".$room."point".$point."slider\" id=\"room".$room."point".$point."slider\" data-mini=\"true\" min=\"2\" max=\"10\" data-highlight=\"true\" type=\"range\">\n";

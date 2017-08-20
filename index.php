@@ -31,7 +31,7 @@
             <?php include($_SERVER['DOCUMENT_ROOT']."/includes/controls.php"); ?>
         </div>
     </div>
-
+	
     <script language="javascript" type="text/javascript">
         $(window).load(function() {
             $('#loading').hide();
