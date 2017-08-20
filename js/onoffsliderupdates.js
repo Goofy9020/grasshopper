@@ -43,6 +43,16 @@
                 echo "    var bticinolightnumber = \"".$myroomkeys[$point]."\";\n";
                 echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\"*1*18*\" + bticinolightnumber + \"##\"));\n";
                 echo "});\n";
+            } else if ($mypoint[1] == 4) {
+                echo "$(\"#room".$room."point".$point."button\").bind('click', function() {\n";
+                echo "    var bticinolightnumber = document.getElementById('textfeld').value;\n";
+                //echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\" + bticinolightnumber + \"));\n";
+				echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\"\" + bticinolightnumber + \"##\"));\n";
+// Szenarien werden einfach durchnummeriert (erstellungszeitpunkt denk ich); ausführen des CEN Szenario *17*1*321## -> Starten Szenario 312
+//echo "alert(\"$.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\" + bticinolightnumber + \"\");\n";
+//echo "alert(bticinolightnumber);\n";
+echo "});\n";
+
             }
         }
     }

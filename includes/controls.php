@@ -35,15 +35,25 @@
                 echo "                        <button class=\"ui-btn ui-icon-power ui-btn-icon-notext\" name=\"room".$room."point".$point."button\" id=\"room".$room."point".$point."button\">Button</button>\n";
                 echo "                    </div>\n";
                 echo "                </div>\n";
-            } else {
+            } else if ($mypoint[1] == 4) {
+                echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
+				echo "                <textarea name='textfeld' id='textfeld' rows='1' cols='40'></textarea>\n";
+				echo "                </div>\n";
+                echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
+                echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"right\">\n";
+                echo "                        <button class=\"ui-btn ui-icon-power ui-btn-icon-notext\" name=\"room".$room."point".$point."button\" id=\"room".$room."point".$point."button\">Button</button>\n";
+                echo "                    </div>\n";
+                echo "                </div>\n";
+			} else {
                 if ($mypoint[1] == 1) {
                     echo "                <div class=\"ui-block-b\" style=\"width:50%\" id=\"div-room".$room."point".$point."slider\">\n";
                     echo "                    <input name=\"room".$room."point".$point."slider\" id=\"room".$room."point".$point."slider\" data-mini=\"true\" min=\"2\" max=\"10\" data-highlight=\"true\" type=\"range\">\n";
                     echo "                </div>\n";
-                } else {
+                } 
+				else {
                     echo "                <div class=\"ui-block-b\" style=\"width:50%\"></div>\n";
                 }
-                echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
+				echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
                 echo "                    <span class=\"fliper\">\n";
                 echo "                        <select name=\"room".$room."point".$point."onoffslider\" id=\"room".$room."point".$point."onoff\" data-role=\"slider\" data-mini=\"true\">\n";
                 echo "                            <option value=\"off\">Off</option>\n";
