@@ -19,7 +19,7 @@
 	# Defines
 	#/////////////////////////////////////////////////////////////////////////////////////
 	#Filepaths
-	FILEPATH_GRASSHOPPER="/var/www"
+	FILEPATH_GRASSHOPPER="/var/www/html"
 	FILEPATH_LOGS="/var/log/grasshopper"
 
 	#Exit path for non-root privileges.
