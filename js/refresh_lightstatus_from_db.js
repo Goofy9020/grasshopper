@@ -38,6 +38,12 @@ function refresh_lightstatus() {
                             echo "    room".$room."point".$point."status = data.groups[i].status;\n";
                             echo "}\n";
                         }
+						else if (($mypoint[1] == 5) || ($mypoint[1] == 6))
+						{
+							echo "if ((data.groups[i].btaddress == \"".$myroomkeys[$point]."\") && (data.groups[i].btgroup == 16)) {\n";
+                            echo "    room".$room."point".$point."status = data.groups[i].status;\n";
+                            echo "}\n";
+						}
                     }
                 }
             ?>
@@ -63,7 +69,8 @@ function refresh_lightstatus() {
                     if (!isset($mypoint[1])) {
                         $mypoint[1] = 0;
                     }
-                    if (($mypoint[1] == 0) || ($mypoint[1] == 1)) {
+                    if (($mypoint[1] == 0) || ($mypoint[1] == 1))
+					{
                         echo "if (typeof room".$room."point".$point."status != 'undefined') {\n";
                         echo "    if (room".$room."point".$point."status != \"0\") {\n";
                         echo "        $(\"#room".$room."point".$point."onoff\").val('on').slider(\"refresh\")\n";
@@ -76,6 +83,17 @@ function refresh_lightstatus() {
                         }
                         echo "}\n";
                     }
+					else if (($mypoint[1] == 5) || ($mypoint[1] == 6))
+					{
+						echo "if (typeof room".$room."point".$point."status != 'undefined') {\n";
+                        echo "    if (room".$room."point".$point."status != \"13\") {\n";
+                        echo "        $(\"#room".$room."point".$point."onoff\").val('on').slider(\"refresh\")\n";
+                        echo "    }\n";
+                        echo "    else {\n";
+                        echo "        $(\"#room".$room."point".$point."onoff\").val('off').slider(\"refresh\")\n";
+                        echo "    }\n";
+						echo "}\n";
+					}
                 }
             }
 
@@ -95,6 +113,13 @@ function refresh_lightstatus() {
                     if (($mypoint[1] == 0) || ($mypoint[1] == 1)) {
                         echo "if (typeof room".$room."point".$point."status != 'undefined') {\n";
                         echo "    if (room".$room."point".$point."status != \"0\") {\n";
+                        echo "        update".$room."counter++;\n";
+                        echo "    }\n";
+                        echo "}\n";
+                    }
+					else if (($mypoint[1] == 5) || ($mypoint[1] == 6)) {
+                        echo "if (typeof room".$room."point".$point."status != 'undefined') {\n";
+                        echo "    if (room".$room."point".$point."status != \"13\") {\n";
                         echo "        update".$room."counter++;\n";
                         echo "    }\n";
                         echo "}\n";

@@ -9,7 +9,8 @@
         $myroomvalues = array_values($myroom);
         echo "<div data-role=\"collapsible\">\n";
         echo "    <h2><div class=\"ui-btn-up-c ui-btn-corner-all custom-count-pos\" name=\"room".$room."counter\" id=\"room".$room."counter\"></div>".$myhomekeys[$room]."</h2>\n";
-        echo "    <ul data-role=\"listview\" data-split-theme=\"a\" class=\"listviewclass\">\n";
+        //echo "    <h2><div class=\"ui-btn-up-c ui-btn-corner-all custom-count-pos\" name=\"room".$room."counter\" id=\"room".$room."counter\"></div>\n<div class=\"ui-btn-up-c ui-btn-corner-all custom-count-pos\" name=\"room".$room."temperature\" id=\"room".$room."temperature\">0</div>".$myhomekeys[$room]."</h2>\n";
+		echo "    <ul data-role=\"listview\" data-split-theme=\"a\" class=\"listviewclass\">\n";
         $pointscount = count($myroom);
         for ($point = 0; $point < $pointscount; $point++) {
             $mypoint = explode(',', $myroomvalues[$point]);
@@ -49,21 +50,33 @@
                 echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
                 echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"center\">\n";
                 echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*1101*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"minus\" data-iconpos=\"notext\" align=\"right\">Vol down</a>\n";
-				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*3*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"power\" data-iconpos=\"notext\" align=\"right\">On / Off</a>\n";
 				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*1001*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"plus\" data-iconpos=\"notext\" align=\"right\">Vol up</a>\n";
 				echo "                    </div>\n";
+				echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
+                echo "                    <span class=\"fliper\">\n";
+                echo "                        <select name=\"room".$room."point".$point."onoffslider\" id=\"room".$room."point".$point."onoff\" data-role=\"slider\" data-mini=\"true\">\n";
+                echo "                            <option value=\"off\">Off</option>\n";
+                echo "                            <option value=\"on\">On</option>\n";
+                echo "                        </select>\n";
+                echo "                    </span>\n";
                 echo "                </div>\n";
-                echo "                <div class=\"ui-block-c\" style=\"width:25%\"></div>\n";
+                echo "                </div>\n";
 			} 
 			else if ($mypoint[1] == 6) {
                 echo "                <div class=\"ui-block-b\" style=\"width:50%\">\n";
                 echo "                    <div data-role=\"controlgroup\" data-type=\"horizontal\" data-mini=\"true\" align=\"center\">\n";
-                echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6101*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-l\" data-iconpos=\"notext\" align=\"right\">Vol down</a>\n";
-				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*3*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"power\" data-iconpos=\"notext\" align=\"right\">On / Off</a>\n";
-				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6001*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-r\" data-iconpos=\"notext\" align=\"right\">Vol up</a>\n";
+                echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6101*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-l\" data-iconpos=\"notext\" align=\"right\">Prev. Source</a>\n";
+				echo "                        <a href=\"javascript:openpage('exec/ownCommand.php?frame=' + encodeURIComponent('*16*6001*".$myroomkeys[$point]."##'))\" data-role=\"button\" data-icon=\"arrow-r\" data-iconpos=\"notext\" align=\"right\">Next Source</a>\n";
 				echo "                    </div>\n";
+				echo "                <div class=\"ui-block-c\" style=\"width:25%\">\n";
+                echo "                    <span class=\"fliper\">\n";
+                echo "                        <select name=\"room".$room."point".$point."onoffslider\" id=\"room".$room."point".$point."onoff\" data-role=\"slider\" data-mini=\"true\">\n";
+                echo "                            <option value=\"off\">Off</option>\n";
+                echo "                            <option value=\"on\">On</option>\n";
+                echo "                        </select>\n";
+                echo "                    </span>\n";
                 echo "                </div>\n";
-                echo "                <div class=\"ui-block-c\" style=\"width:25%\"></div>\n";
+                echo "                </div>\n";
 			} 
 			else {
                 if ($mypoint[1] == 1) {

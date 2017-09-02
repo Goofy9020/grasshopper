@@ -7,10 +7,11 @@ import os
 import subprocess
 import sqlite3
 import datetime
+import time
 import ownGateway
 
 dbfile    = "/var/www/db/grasshopper.sqlite"
-logfolder = "/var/log/grasshopper"
+logfolder = "/var/log/grasshopper/"
 
 recipient = "some.address@email.com"
 
@@ -40,7 +41,7 @@ def write_to_log(message):
         fh = open(logfolder + filename1,"a")
         message = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S') + "   " + message + "\r\n"
         fh.write(message)
-        #print(message)
+        print(message)
     except:
         print("Unexpected error in write_to_log")
     finally:
@@ -48,6 +49,7 @@ def write_to_log(message):
 
 def monitor():
     try:
+        #write_to_log("test1 ")
         dbdir = os.path.dirname(dbfile)
         if not os.path.exists(dbdir):
             os.makedirs(dbdir)
@@ -73,6 +75,9 @@ def monitor():
             raise Exception("Unable to connect to gateway in Command mode!")
         try:
             ownGateway.SendData(scmd, "*#1*0##")
+            #read_bus()
+            #ownGateway.SendData(scmd, "*#16*0*5##")
+            #read_bus()
         finally:
             ownGateway.Disconnect(scmd)
         # Start monitoring cycle
@@ -80,8 +85,10 @@ def monitor():
         while 1:
             next = ownGateway.RecData(smon)  # now read data from MyHome BUS
             if next == "":
+                write_to_log("break")
                 break               # EOF
             data = data + next
+            #write_to_log(data)
             while 1:
                 eom = data.find("##")
                 if eom < 0:
@@ -117,6 +124,14 @@ def monitor():
                             db_connect_and_update(msg[1:2],address,addressstatus,False,msg + " (next: " + data + ")")
                             #write_to_log("SUCCESS! Processed. Now continuing with: " + data)
                             continue
+                elif (msg[0:4] == "*16*"): # this is a radio event; check whether to update the databse or not.
+                    msg1 = msg[4:]
+                    addressstatus = msg1[0:msg1.find("*")]
+                    address = msg1[len(addressstatus)+1:msg1.find("##")]
+                    #write_to_log(msg + " / lighting event: address " + address + " is set to value " + addressstatus)
+                    db_connect_and_update(msg[1:3],address,addressstatus,False,msg + " (next: " + data + ")")
+                    #write_to_log("SUCCESS! Processed. Now continuing with: " + data)
+                    continue
                 else:
                     #write_to_log("NOT VALID: doesn't start with *1* or *2*: " + msg)
                     #write_to_log("CONTINUE with: " + data)
@@ -127,6 +142,8 @@ def monitor():
         ownGateway.Disconnect(smon)
         sys.exit()
 
+#def read_bus():
+      
 
 if __name__=='__main__':
     monitor()                           # start the monitor

@@ -38,22 +38,45 @@
                 }
                 echo "    run_update_every_x_milliseconds = setInterval(refresh_lightstatus, 1000);\n";
                 echo "});\n";
-            } else if ($mypoint[1] == 3) {
+            } 
+			else if ($mypoint[1] == 3) 
+			{
                 echo "$(\"#room".$room."point".$point."button\").bind('click', function() {\n";
                 echo "    var bticinolightnumber = \"".$myroomkeys[$point]."\";\n";
                 echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\"*1*18*\" + bticinolightnumber + \"##\"));\n";
                 echo "});\n";
-            } else if ($mypoint[1] == 4) {
+            } 
+			else if ($mypoint[1] == 4) 
+			{
                 echo "$(\"#room".$room."point".$point."button\").bind('click', function() {\n";
                 echo "    var bticinolightnumber = document.getElementById('textfeld').value;\n";
                 //echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\" + bticinolightnumber + \"));\n";
 				echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\"\" + bticinolightnumber + \"##\"));\n";
-// Szenarien werden einfach durchnummeriert (erstellungszeitpunkt denk ich); ausführen des CEN Szenario *17*1*321## -> Starten Szenario 312
-//echo "alert(\"$.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\" + bticinolightnumber + \"\");\n";
-//echo "alert(bticinolightnumber);\n";
-echo "});\n";
-
-            }
+				//echo "    $.post(\"exec/ownReceived.php\");\n";
+				
+				
+				// Szenarien werden einfach durchnummeriert (erstellungszeitpunkt denk ich); ausführen des CEN Szenario *17*1*321## -> Starten Szenario 312
+				//echo "alert(\"$.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\" + bticinolightnumber + \"\");\n";
+				//echo "alert(bticinolightnumber);\n";
+				echo "});\n";
+            } 
+			else if (($mypoint[1] == 5) || ($mypoint[1] == 6))
+			{ //RADIO = 5; Source = 6
+				echo "$(\"#room".$room."point".$point."onoff\").on('slidestart', function() {\n";
+                echo "    window.clearInterval(run_update_every_x_milliseconds);\n";
+                echo "});\n";
+                echo "$(\"#room".$room."point".$point."onoff\").on('slidestop', function() {\n";
+                echo "    var bticinolightnumber = \"".$myroomkeys[$point]."\";\n";
+                echo "    var onoffsliderstatus = $(this).val();\n";
+                echo "    if (onoffsliderstatus != \"off\") {\n";
+				echo "        var onoffsliderstatusnumber = 3\n";
+				echo "    } else {\n";
+                echo "        var onoffsliderstatusnumber = 13;\n";
+                echo "    }\n";
+                echo "    $.post(\"exec/ownCommand.php?frame=\" + encodeURIComponent(\"*16*\" + onoffsliderstatusnumber + \"*\" + bticinolightnumber + \"##\"));\n";
+				echo "    run_update_every_x_milliseconds = setInterval(refresh_lightstatus, 1000);\n";
+                echo "});\n";
+			}
         }
     }
 ?>
